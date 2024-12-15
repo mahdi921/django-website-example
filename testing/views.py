@@ -3,12 +3,12 @@ from django.http import HttpResponse, JsonResponse
 
 
 def index_view(request):
-    return HttpResponse('<h1>hello this is index page</h1>')
+    return render(request, 'index.html')
 
 
 def about_view(request):
-    return HttpResponse('<h2>this is about page</h2>')
+    return render(request, 'about.html')
 
 
 def contact_view(request):
-    return HttpResponse('<h3>this is contact us page</h3>')
+    return render(request, 'contact-us.html')
