@@ -5,7 +5,7 @@ from datetime import datetime
 # Create your views here.
 
 def blog_view(request):
-    posts = Post.objects.filter(published_date__lte=datetime.now(), status=True)
+    posts = Post.objects.filter(published_date__lte=datetime.now(), status=1)
     # posts.counted_views += 1
     context = {
         'posts': posts
@@ -14,7 +14,7 @@ def blog_view(request):
 
 
 def blog_single(request,pid):
-    post = get_object_or_404(Post, id=pid)
+    post = get_object_or_404(Post, id=pid,status=1,published_date__lte=datetime.now())
     post.counted_views += 1
     post.save()
     context={
