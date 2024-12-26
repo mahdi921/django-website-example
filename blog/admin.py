@@ -5,8 +5,8 @@ from blog.models import Post
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'counted_views', 'status', 'published_date', 'created_date', 'updated_date')
-    list_filter = ('status', 'created_date')
+    list_display = ('title', 'author', 'counted_views', 'status', 'published_date', 'created_date', 'updated_date')
+    list_filter = ('status','author', 'created_date')
     search_fields = ('title', 'content')
     # ordering = ['-created_date']
     actions = ['make_published']
