@@ -1,12 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from blog.models import Post
-from datetime import datetime
+from django.utils import timezone
 
 # Create your views here.
 
 def blog_view(request):
-    posts = Post.objects.filter(published_date__lte=datetime.now(), status=1)
-    # posts.counted_views += 1
+    posts = Post.objects.filter(published_date__lte=timezone.now(), status=1)
     context = {
         'posts': posts
     }
