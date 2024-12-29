@@ -13,10 +13,14 @@ def blog_view(request):
 
 
 def blog_single(request,pid):
-    post = get_object_or_404(Post, id=pid,status=1,published_date__lte=datetime.now())
+    post = get_object_or_404(Post, id=pid, status=1, published_date__lte=timezone.now())
     post.counted_views += 1
     post.save()
+    other_posts = Post.objects.filter(published_date__lte=timezone.now(), status=1).exclude(id=pid)
+    
     context={
-        'post': post
+        'post': post,
+        'next': other_posts.filter(id__gt=post.id).order_by('id').first(),
+        'previous': other_posts.filter(id__lt=post.id).order_by('-id').first()
     }
     return render(request, 'blog/blog-single.html', context)
