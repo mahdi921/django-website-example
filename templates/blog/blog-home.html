@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% load blog_tags %} {% block content %}
 <!-- start banner Area -->
 <section class="banner-area relative blog-home-banner" id="home">
   <div class="overlay overlay-bg"></div>
@@ -173,12 +173,12 @@
 
           {% include 'blog/blog-ads-widget.html' %}
 
-          {% include 'blog/blog-category-widget.html' %}
+          {% categories_widget %}
 
           {% include 'blog/blog-newsletter-widget.html' %}
 
-          {% include 'blog/blog-tags-widget.html' %}
-          
+          {% include 'blog/blog-tag-widget.html' %}
+
         </div>
       </div>
     </div>
