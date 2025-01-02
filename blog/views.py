@@ -24,3 +24,10 @@ def blog_single(request,pid):
         'previous': other_posts.filter(id__lt=post.id).order_by('-id').first()
     }
     return render(request, 'blog/blog-single.html', context)
+
+
+def blog_category(request, category_name):
+    posts = Post.objects.filter(published_date__lte=timezone.now(), status=1)
+    posts = posts.filter(category__name=category_name)
+    context = {'posts': posts}
+    return render(request, 'blog/blog-home.html', context)
