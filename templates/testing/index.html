@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %} {% load static %}
+{% extends 'base.html' %} {% block content %} {% load static %} {% load index_tags %}
 
 <!-- start banner Area -->
 <section class="banner-area relative">
@@ -196,6 +196,8 @@
     </div>
     <div class="row">
       <div class="active-recent-blog-carusel">
+        {% index_posts %}
+        {% comment %}
         <div class="single-recent-blog-post item">
           <div class="thumb">
             <img class="img-fluid" src="{% static 'img/b1.jpg' %}" alt="" />
@@ -219,7 +221,7 @@
             <h6 class="date">31st January,2018</h6>
           </div>
         </div>
-        <div class="single-recent-blog-post item">
+         <div class="single-recent-blog-post item">
           <div class="thumb">
             <img class="img-fluid" src="{% static 'img/b2.jpg' %}" alt="" />
           </div>
@@ -337,7 +339,7 @@
             </p>
             <h6 class="date">31st January,2018</h6>
           </div>
-        </div>
+        </div> {% endcomment %}
       </div>
     </div>
   </div>
