@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Form Test</title>
-</head>
-<body>
+  </head>
+  <body>
     <h3>Form Test</h3>
     <form action="{% url 'testing:form-test' %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <p>
-            <button type="submit">Submit</button>
-        </p>
+      {% csrf_token %} {{ form.as_p }}
+      <p>
+        <button type="submit">Submit</button>
+      </p>
     </form>
-</body>
+  </body>
 </html>
