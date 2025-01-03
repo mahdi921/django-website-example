@@ -12,7 +12,12 @@ def about_view(request):
 
 
 def contact_view(request):
-    return render(request, 'testing/contact.html')
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+    form = ContactForm()
+    return render(request, 'testing/contact.html', {'form':form})
 
 
 def form_test_view(request):
