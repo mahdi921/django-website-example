@@ -1,5 +1,5 @@
 from django import forms
-from testing.models import Contact
+from testing.models import Contact, Newsletter
 
 class ContactForm(forms.ModelForm):
     class Meta:
@@ -12,3 +12,9 @@ class TestForm(forms.ModelForm):
     email = forms.EmailField()
     subject = forms.CharField(max_length=200)
     message = forms.CharField(widget=forms.Textarea)
+    
+    
+class NewsletterForm(forms.ModelForm):
+    class Meta:
+        model = Newsletter
+        fields = '__all__'

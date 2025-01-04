@@ -1,5 +1,5 @@
 from django.contrib import admin
-from testing.models import Contact
+from testing.models import Contact, Newsletter
 
 # Register your models here.
 
@@ -10,3 +10,10 @@ class ContactAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email', 'subject')
     date_hierarchy = 'created_date'
     empty_value_display = '-empty-'
+    
+@admin.register(Newsletter)
+class NewsletterAdmin(admin.ModelAdmin):
+    list_display = ('email', 'created_date')
+    list_filter = ('created_date',)
+    search_fields = ('email',)
+    date_hierarchy = 'created_date'
