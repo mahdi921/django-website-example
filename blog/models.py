@@ -27,3 +27,7 @@ class Post(models.Model):
     
     def __str__(self):
         return f'{self.title} - {self.id}'
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("blog:single", kwargs={"pid": self.id})
