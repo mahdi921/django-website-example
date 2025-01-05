@@ -6,6 +6,7 @@ colorama>=0.4.6
 cssbeautifier>=1.15.1
 dill>=0.3.9
 Django>=4.2,<5.0
+django-debug-toolbar>=4.4.6
 django-extensions>=3.2.3
 django-robots>=6.1
 djlint>=1.36.4
