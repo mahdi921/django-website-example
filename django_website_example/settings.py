@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'robots',
     'django.contrib.humanize',
     'django_extensions',
+    'taggit',
     'testing.apps.TestingConfig',
     'blog.apps.BlogConfig',
 ]

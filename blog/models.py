@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
 # Create your models here.
 
 class Category(models.Model):
@@ -16,6 +17,7 @@ class Post(models.Model):
     title = models.CharField(max_length=150)
     content = models.TextField()
     category = models.ManyToManyField(Category)
+    tag = TaggableManager()
     image = models.ImageField(upload_to='blog/', default='blog/default.jpg')
     counted_views = models.IntegerField(default=0)
     status = models.BooleanField(default=False)
