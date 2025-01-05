@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
-from testing.models import Contact
+from django.http import HttpResponse, HttpResponseRedirect
 from testing.forms import ContactForm, NewsletterForm
+from django.contrib import messages
 
 def index_view(request):
     return render(request, 'testing/index.html')
@@ -13,9 +13,18 @@ def about_view(request):
 
 def contact_view(request):
     if request.method == 'POST':
-        form = ContactForm(request.POST)
+        data = {
+            'name': 'Anonymous',
+            'email': request.POST.get('email'),
+            'subject': request.POST.get('subject') or None,
+            'message': request.POST.get('message'),
+        }
+        form = ContactForm(data)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS, 'Your message has been sent')
+        elif form.errors:
+            messages.add_message(request, messages.ERROR, 'Your message has not been sent, check your input')
     form = ContactForm()
     return render(request, 'testing/contact.html', {'form':form})
 

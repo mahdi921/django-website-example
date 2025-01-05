@@ -194,7 +194,13 @@
       </div>
     </footer>
     <!-- End footer Area -->
-
+    {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+             {% if message.tags %} <script>alert('{{ message }}')</script>{% endif %}
+            {% endfor %}
+          </ul>
+        {% endif %}
     <script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
