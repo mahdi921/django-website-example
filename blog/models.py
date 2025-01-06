@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
+from tinymce import models as tinymce_models
 # Create your models here.
 
 class Category(models.Model):
@@ -15,7 +16,7 @@ class Category(models.Model):
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=150)
-    content = models.TextField()
+    content = tinymce_models.HTMLField()
     category = models.ManyToManyField(Category)
     tag = TaggableManager()
     image = models.ImageField(upload_to='blog/', default='blog/default.jpg')
