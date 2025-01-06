@@ -13,15 +13,13 @@ def about_view(request):
 
 def contact_view(request):
     if request.method == 'POST':
-        data = {
-            'name': 'Anonymous',
-            'email': request.POST.get('email'),
-            'subject': request.POST.get('subject') or None,
-            'message': request.POST.get('message'),
-        }
-        form = ContactForm(data)
+        form = ContactForm(request.POST)
         if form.is_valid():
+            new_instance = form.save(commit=False)
+            new_instance.name = 'Anonymous'
+            new_instance.save()
             form.save()
+            human = True
             messages.add_message(request, messages.SUCCESS, 'Your message has been sent')
         elif form.errors:
             messages.add_message(request, messages.ERROR, 'Your message has not been sent, check your input')

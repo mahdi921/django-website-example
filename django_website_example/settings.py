@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django_extensions',
     'taggit',
+    'captcha',
     'tinymce',
     'testing.apps.TestingConfig',
     'blog.apps.BlogConfig',
