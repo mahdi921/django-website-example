@@ -34,3 +34,19 @@ class Post(models.Model):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse("blog:single", kwargs={"pid": self.id})
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    subject = models.CharField(max_length=255)
+    message = tinymce_models.HTMLField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+    approved = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['created_date']
+
+    def __str__(self):
+        return f'{self.name} - {self.post}'
