@@ -37,10 +37,10 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    email = models.EmailField()
-    subject = models.CharField(max_length=255)
-    message = tinymce_models.HTMLField()
+    name = models.CharField(max_length=255, blank=False)
+    email = models.EmailField(blank=False)
+    subject = models.CharField(max_length=255, blank=True, default='No Subject')
+    message = models.TextField(blank=False)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
