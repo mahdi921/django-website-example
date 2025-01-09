@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'tinymce',
     'testing.apps.TestingConfig',
     'blog.apps.BlogConfig',
+    'accounts.apps.AccountsConfig',
 ]
 #Sites framework
 SITE_ID = 2
