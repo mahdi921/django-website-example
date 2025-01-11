@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -18,7 +18,9 @@ def login_view(request):
                     messages.add_message(request, messages.SUCCESS,
                                          'Login successful, redirecting to home page...')
                     return redirect('/')
-
+            else:
+                messages.add_message(request, messages.ERROR,
+                                     'Check your input and try again')
         else:
             form = AuthenticationForm()
         return render(request, 'accounts/login.html', {'form': form})
@@ -29,7 +31,13 @@ def login_view(request):
 
 
 def logout_view(request):
-    return render(request, 'accounts/logout.html')
+    if request.user.is_authenticated:
+        logout(request)
+        messages.add_message(request, messages.SUCCESS,
+                             "You have been logged out, redirecting to home page...")
+    messages.add_message(request, messages.SUCCESS,
+                         "You have not been logged in yet, redirecting to home page...")
+    return redirect('/')
 
 def register_view(request):
     return render(request, 'accounts/register.html')
