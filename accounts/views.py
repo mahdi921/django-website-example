@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -29,15 +30,29 @@ def login_view(request):
                              "You are already logged in, redirecting to home page...")
         return redirect('/')
 
-
+@login_required
 def logout_view(request):
-    if request.user.is_authenticated:
-        logout(request)
-        messages.add_message(request, messages.SUCCESS,
-                             "You have been logged out, redirecting to home page...")
+    logout(request)
     messages.add_message(request, messages.SUCCESS,
-                         "You have not been logged in yet, redirecting to home page...")
+                        "You have been logged out, redirecting to home page...")
     return redirect('/')
 
 def register_view(request):
-    return render(request, 'accounts/register.html')
+    if not request.user.is_authenticated:
+        if request.method == "POST":
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.add_message(request, messages.SUCCESS,
+                                     "Registration successful, redirecting to login page...")
+                return redirect('/accounts/login')
+            else:
+                messages.add_message(request, messages.ERROR,
+                                     "Check your input and try again")
+        form = UserCreationForm()
+        context = {
+            'form' : form
+        }
+        return render(request, 'accounts/register.html', context)
+    else:
+        redirect('/')

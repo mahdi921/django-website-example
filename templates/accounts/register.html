@@ -1,10 +1,56 @@
-<!DOCTYPE html>
+{% load static %}
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{% static 'accounts/assets/img/favicons/favicon.ico' %}">
 
-</body>
+    <title>Resigtration</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'accounts/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'accounts/signin.css' %}" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    <form
+          class="form-signin"
+          method="post"
+          action="{% url 'accounts:register' %}"
+    >
+      {% csrf_token %}
+      <img class="mb-4" src="{% static 'accounts/assets/brand/bootstrap-solid.svg' %}" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">Please Register</h1>
+      <label for="username" class="sr-only">User Name</label>
+      <input type="text" id="username" name="username" class="form-control" placeholder="User Name" required autofocus>
+      <label for="email" class="sr-only">Email</label>
+      <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+      <label for="password1" class="sr-only">Password</label>
+      <input type="password" id="password1" name="password1" class="form-control" placeholder="Password" required>
+      <label for="password2" class="sr-only">Confirm Password</label>
+      <input type="password" id="password2" name="password2" class="form-control" placeholder="Confirm Password" required>
+<!--      <div class="checkbox mb-3">-->
+<!--        <label>-->
+<!--          <input type="checkbox" value="remember-me"> Remember me-->
+<!--        </label>-->
+<!--      </div>-->
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+
+      <p class="mt-5 mb-3 text-muted">&copy; 2025-2026</p>
+    </form>
+      {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+             {% if message.tags %} <script>alert('{{ message }}')</script>{% endif %}
+            {% endfor %}
+          </ul>
+      {% endif %}
+  </body>
 </html>
