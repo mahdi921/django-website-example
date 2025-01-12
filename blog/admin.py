@@ -6,7 +6,7 @@ from blog.models import Post, Category, Comment
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'counted_views', 'status',
+    list_display = ('title', 'author', 'counted_views', 'status','login_required',
                     'published_date', 'created_date', 'updated_date')
     list_filter = ('status', 'author', 'created_date')
     search_fields = ('title', 'content')
