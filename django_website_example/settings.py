@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -202,3 +205,25 @@ TINYMCE_DEFAULT_CONFIG = {
     "images_upload_url": "/tinymce/upload",
     "images_upload_handler": "tinymce_image_upload_handler"
 }
+# email configs
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+# using dotenv module to get the email and password from .env file
+# you need to set credentials in .env "file" on root directory
+load_dotenv()
+EMAIL_HOST_USER = str(os.getenv('EMAIL_USER'))
+EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_PASSWORD'))
+
+#admin configs got with dotenv module
+ADMIN_USER_NAME = str(os.getenv('ADMIN_USER_NAME'))
+ADMIN_USER_EMAIL = str(os.getenv('ADMIN_USER_EMAIL'))
+
+MANAGERS=[]
+ADMINS=[]
+if all([ADMIN_USER_NAME, ADMIN_USER_EMAIL]):
+    ADMINS +=[
+        (f'{ADMIN_USER_NAME}', f'{ADMIN_USER_EMAIL}')
+    ]
+    MANAGERS=ADMINS

@@ -37,8 +37,11 @@
           <input type="checkbox" value="remember-me"> Remember me
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <div>
+        <a href="{% url 'accounts:password_reset' %}"><i>Forgot Password?</i></a>
+      </div>
       <p class="mt-5 mb-3 text-muted">&copy; 2025-2026</p>
     </form>
       {% if messages %}
